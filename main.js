@@ -25,3 +25,10 @@ const container = document.createElement('div')
 container.setAttribute('class', 'container')
 
 app.appendChild(container)
+
+// show form
+const addButton = document.querySelector('#add-book')
+addButton.addEventListener('click', (e) => {
+	const form = document.querySelector('#my-form')
+	form.classList.remove('hidden')
+})
