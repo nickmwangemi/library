@@ -32,3 +32,10 @@ addButton.addEventListener('click', (e) => {
 	const form = document.querySelector('#my-form')
 	form.classList.remove('hidden')
 })
+
+// hide form
+const hideButton = document.querySelector('#cancel')
+hideButton.addEventListener('click', (e) => {
+	const form = document.querySelector('#my-form')
+	form.classList.add('hidden')
+})
