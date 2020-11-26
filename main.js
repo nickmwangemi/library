@@ -23,3 +23,5 @@ Book.prototype.addBookToLibrary = function (book) {
 const app = document.querySelector('#root') // access our root div
 const container = document.createElement('div')
 container.setAttribute('class', 'container')
+
+app.appendChild(container)
