@@ -18,3 +18,8 @@ Book.prototype.addBookToLibrary = function (book) {
 	myLibrary.push(book)
 	return `${book.title} has been added to the library.`
 }
+
+// target root div
+const app = document.querySelector('#root') // access our root div
+const container = document.createElement('div')
+container.setAttribute('class', 'container')
