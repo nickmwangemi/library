@@ -39,3 +39,10 @@ hideButton.addEventListener('click', (e) => {
 	const form = document.querySelector('#my-form')
 	form.classList.add('hidden')
 })
+
+// collect data
+const form = document.querySelector('#my-form')
+const author = document.querySelector('#author')
+const title = document.querySelector('#title')
+const pages = document.querySelector('#pages')
+const msg = document.querySelector('.msg')
