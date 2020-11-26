@@ -122,7 +122,7 @@ form.addEventListener('submit', (e) => {
 
 		setTimeout(() => msg.remove(), 3000)
 	} else {
-		const book = new Book(author.value, title.value, pages.value)
+		const book = new Book(title.value, author.value, pages.value)
 
 		// save to local storage
 		Store.addBook(book)
