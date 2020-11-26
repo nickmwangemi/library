@@ -46,3 +46,25 @@ const author = document.querySelector('#author')
 const title = document.querySelector('#title')
 const pages = document.querySelector('#pages')
 const msg = document.querySelector('.msg')
+
+form.addEventListener('submit', (e) => {
+	e.preventDefault()
+
+	if (author.value === '' || title.value === '' || pages.value === '') {
+		msg.classList.add('error')
+		msg.innerHTML = 'Please enter all fields'
+
+		setTimeout(() => msg.remove(), 3000)
+	} else {
+		const book = new Book(author.value, title.value, pages.value)
+
+		// save to local storage
+		Store.addBook(book)
+
+		// reset fields
+		author.value = ''
+		title.value = ''
+		pages.value = ''
+		console.table(myLibrary)
+	}
+})
