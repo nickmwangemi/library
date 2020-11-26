@@ -103,6 +103,9 @@ class Store {
 	static removeBook() {}
 }
 
+// display
+Store.displayBooks()
+
 // collect data
 const form = document.querySelector('#my-form')
 const author = document.querySelector('#author')
