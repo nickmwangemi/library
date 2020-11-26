@@ -13,11 +13,11 @@ Book.prototype.info = function () {
 	}`
 }
 
-Book.prototype.addBookToLibrary = function (book) {
-	book = new Book(this.title, this.author, this.pages, this.read)
-	myLibrary.push(book)
-	return `${book.title} has been added to the library.`
-}
+// Book.prototype.addBookToLibrary = function (book) {
+// 	book = new Book(this.title, this.author, this.pages, this.read)
+// 	myLibrary.push(book)
+// 	return `${book.title} has been added to the library.`
+// }
 
 // target root div
 const app = document.querySelector('#root') // access our root div
@@ -52,7 +52,8 @@ class Store {
 	}
 
 	static displayBooks() {
-		const myLibrary = Store.getBooks()
+		myLibrary = Store.getBooks()
+
 		myLibrary.map((element) => {
 			const card = document.createElement('div')
 			card.setAttribute('class', 'card')
@@ -94,10 +95,9 @@ class Store {
 	}
 
 	static addBook(book) {
-		const myLibrary = Store.getBooks()
-
 		myLibrary.push(book)
 		localStorage.setItem('BOOKS', JSON.stringify(myLibrary))
+		Store.displayBooks()
 	}
 
 	static removeBook() {}
@@ -122,7 +122,7 @@ form.addEventListener('submit', (e) => {
 
 		setTimeout(() => msg.remove(), 3000)
 	} else {
-		const book = new Book(title.value, author.value, pages.value)
+		book = new Book(title.value, author.value, pages.value)
 
 		// save to local storage
 		Store.addBook(book)
@@ -131,6 +131,5 @@ form.addEventListener('submit', (e) => {
 		author.value = ''
 		title.value = ''
 		pages.value = ''
-		console.table(myLibrary)
 	}
 })
