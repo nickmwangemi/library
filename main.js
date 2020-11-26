@@ -40,6 +40,69 @@ hideButton.addEventListener('click', (e) => {
 	form.classList.add('hidden')
 })
 
+// Local storage class
+class Store {
+	static getBooks() {
+		if (localStorage.getItem('BOOKS') === null) {
+			myLibrary
+		} else {
+			myLibrary = JSON.parse(localStorage.getItem('BOOKS'))
+		}
+		return myLibrary
+	}
+
+	static displayBooks() {
+		const myLibrary = Store.getBooks()
+		myLibrary.map((element) => {
+			const card = document.createElement('div')
+			card.setAttribute('class', 'card')
+			// title
+			const h1 = document.createElement('h1')
+			h1.textContent = element.title
+
+			// author
+			const author = document.createElement('p')
+			author.textContent = `Author: ${element.author}`
+
+			const pages = document.createElement('p')
+			pages.textContent = `Pages: ${element.pages}`
+
+			const readStatus = document.createElement('p')
+			readStatus.textContent = element.read
+
+			readStatus.textContent = readStatus
+				? 'Read Status: Read'
+				: 'Read Status: Not read yet'
+
+			const deleteDiv = document.createElement('div')
+			deleteDiv.setAttribute('id', 'delete-book')
+
+			const deleteBtn = document.createElement('button')
+			deleteDiv.appendChild(deleteBtn)
+
+			deleteBtn.setAttribute('class', 'btn-danger delete')
+			deleteBtn.textContent = 'DELETE'
+
+			card.appendChild(h1)
+			card.appendChild(author)
+			card.appendChild(pages)
+			card.appendChild(readStatus)
+			card.appendChild(deleteBtn)
+
+			container.appendChild(card)
+		})
+	}
+
+	static addBook(book) {
+		const myLibrary = Store.getBooks()
+
+		myLibrary.push(book)
+		localStorage.setItem('BOOKS', JSON.stringify(myLibrary))
+	}
+
+	static removeBook() {}
+}
+
 // collect data
 const form = document.querySelector('#my-form')
 const author = document.querySelector('#author')
