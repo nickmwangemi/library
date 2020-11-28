@@ -1,4 +1,17 @@
-let myLibrary = []
+let myLibrary = [
+	(book1 = {
+		title: 'Awesome Book',
+		author: 'Awesome Author',
+		pages: 400,
+		read: true,
+	}),
+	(book2 = {
+		title: 'Awesome Book',
+		author: 'Awesome Author',
+		pages: 400,
+		read: false,
+	}),
+]
 
 function Book(title, author, pages, read) {
 	this.title = title
@@ -13,11 +26,14 @@ Book.prototype.info = function () {
 	}`
 }
 
-// Book.prototype.addBookToLibrary = function (book) {
-// 	book = new Book(this.title, this.author, this.pages, this.read)
-// 	myLibrary.push(book)
-// 	return `${book.title} has been added to the library.`
-// }
+const addBookToLibrary = (bookToSave) => {
+	myLibrary.push(bookToSave)
+	return `${this.title} has been added to the library`
+}
+
+const showBooks = () => {
+	myLibrary.map((book) => console.log(book))
+}
 
 // target root div
 const app = document.querySelector('#root') // access our root div
