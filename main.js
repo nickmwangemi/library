@@ -32,7 +32,44 @@ const addBookToLibrary = (bookToSave) => {
 }
 
 const showBooks = () => {
-	myLibrary.map((book) => console.log(book))
+	myLibrary.map((element) => {
+		const card = document.createElement('div')
+		card.setAttribute('class', 'card')
+		// title
+		const h1 = document.createElement('h1')
+		h1.textContent = element.title
+
+		// author
+		const author = document.createElement('p')
+		author.textContent = `Author: ${element.author}`
+
+		const pages = document.createElement('p')
+		pages.textContent = `Pages: ${element.pages}`
+
+		const readStatus = document.createElement('p')
+		readStatus.textContent = element.read
+
+		readStatus.textContent = readStatus
+			? 'Read Status: Read'
+			: 'Read Status: Not read yet'
+
+		const deleteDiv = document.createElement('div')
+		deleteDiv.setAttribute('id', 'delete-book')
+
+		const deleteBtn = document.createElement('button')
+		deleteDiv.appendChild(deleteBtn)
+
+		deleteBtn.setAttribute('class', 'btn-danger delete')
+		deleteBtn.textContent = 'DELETE'
+
+		card.appendChild(h1)
+		card.appendChild(author)
+		card.appendChild(pages)
+		card.appendChild(readStatus)
+		card.appendChild(deleteBtn)
+
+		container.appendChild(card)
+	})
 }
 
 // target root div
@@ -67,49 +104,6 @@ class Store {
 		return myLibrary
 	}
 
-	static displayBooks() {
-		myLibrary = Store.getBooks()
-
-		myLibrary.map((element) => {
-			const card = document.createElement('div')
-			card.setAttribute('class', 'card')
-			// title
-			const h1 = document.createElement('h1')
-			h1.textContent = element.title
-
-			// author
-			const author = document.createElement('p')
-			author.textContent = `Author: ${element.author}`
-
-			const pages = document.createElement('p')
-			pages.textContent = `Pages: ${element.pages}`
-
-			const readStatus = document.createElement('p')
-			readStatus.textContent = element.read
-
-			readStatus.textContent = readStatus
-				? 'Read Status: Read'
-				: 'Read Status: Not read yet'
-
-			const deleteDiv = document.createElement('div')
-			deleteDiv.setAttribute('id', 'delete-book')
-
-			const deleteBtn = document.createElement('button')
-			deleteDiv.appendChild(deleteBtn)
-
-			deleteBtn.setAttribute('class', 'btn-danger delete')
-			deleteBtn.textContent = 'DELETE'
-
-			card.appendChild(h1)
-			card.appendChild(author)
-			card.appendChild(pages)
-			card.appendChild(readStatus)
-			card.appendChild(deleteBtn)
-
-			container.appendChild(card)
-		})
-	}
-
 	static addBook(book) {
 		myLibrary.push(book)
 		localStorage.setItem('BOOKS', JSON.stringify(myLibrary))
@@ -120,7 +114,7 @@ class Store {
 }
 
 // display
-Store.displayBooks()
+showBooks()
 
 // collect data
 const form = document.querySelector('#my-form')
