@@ -1,16 +1,16 @@
 let myLibrary = [
-	(book1 = {
-		title: 'Awesome Book',
-		author: 'Awesome Author',
-		pages: 400,
-		read: true,
-	}),
-	(book2 = {
-		title: 'Awesome Book',
-		author: 'Awesome Author',
-		pages: 400,
-		read: false,
-	}),
+	// (book1 = {
+	// 	title: 'Awesome Book',
+	// 	author: 'Awesome Author',
+	// 	pages: 400,
+	// 	read: true,
+	// }),
+	// (book2 = {
+	// 	title: 'Awesome Book',
+	// 	author: 'Awesome Author',
+	// 	pages: 400,
+	// 	read: false,
+	// }),
 ]
 
 function Book(title, author, pages, read) {
@@ -28,10 +28,22 @@ Book.prototype.info = function () {
 
 const addBookToLibrary = (bookToSave) => {
 	myLibrary.push(bookToSave)
+	localStorage.setItem('BOOKS', JSON.stringify(myLibrary))
+	showBooks()
 	return `${this.title} has been added to the library`
 }
 
+const getBooksFromLocalStorage = () => {
+	if (localStorage.getItem('BOOKS') === null) {
+		myLibrary
+	} else {
+		myLibrary = JSON.parse(localStorage.getItem('BOOKS'))
+	}
+	return myLibrary
+}
+
 const showBooks = () => {
+	myLibrary = getBooksFromLocalStorage()
 	myLibrary.map((element) => {
 		const card = document.createElement('div')
 		card.setAttribute('class', 'card')
@@ -93,26 +105,6 @@ hideButton.addEventListener('click', (e) => {
 	form.classList.add('hidden')
 })
 
-// Local storage class
-class Store {
-	static getBooks() {
-		if (localStorage.getItem('BOOKS') === null) {
-			myLibrary
-		} else {
-			myLibrary = JSON.parse(localStorage.getItem('BOOKS'))
-		}
-		return myLibrary
-	}
-
-	static addBook(book) {
-		myLibrary.push(book)
-		localStorage.setItem('BOOKS', JSON.stringify(myLibrary))
-		Store.displayBooks()
-	}
-
-	static removeBook() {}
-}
-
 // display
 showBooks()
 
@@ -134,8 +126,8 @@ form.addEventListener('submit', (e) => {
 	} else {
 		book = new Book(title.value, author.value, pages.value)
 
-		// save to local storage
-		Store.addBook(book)
+		// save
+		addBookToLibrary(book)
 
 		// reset fields
 		author.value = ''
